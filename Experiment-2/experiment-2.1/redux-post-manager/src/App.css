@@ -1,0 +1,65 @@
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #74ebd5, #9face6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.add-btn {
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.post-list {
+  margin-top: 20px;
+}
+
+.post {
+  background: #ffffff;
+  border-left: 5px solid #007bff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.post h4 {
+  margin: 0;
+  color: #333;
+}
+
+.post p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  margin-top: 10px;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}

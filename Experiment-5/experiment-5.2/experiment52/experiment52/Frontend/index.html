@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experiment 5.2 - User Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <h1>Experiment 5.2</h1>
+  <h2>Global Exception Handling & Structured Logging</h2>
+
+  <div class="card">
+    <h3>User Management</h3>
+    <form id="userForm">
+      <input id="uid" placeholder="Enter UID" required>
+      <input id="name" placeholder="Enter Name" required>
+      <button type="submit">Add User</button>
+      <button type="button" onclick="updateUser()">Update User</button>
+      <button type="button" onclick="clearForm()">Clear</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>Search User</h3>
+    <input id="searchUid" placeholder="Enter UID to search">
+    <button onclick="searchUser()">Search</button>
+    <div id="searchResult"></div>
+  </div>
+
+  <div class="card">
+    <button onclick="loadUsers()">Refresh Users</button>
+    <table>
+      <thead><tr><th>UID</th><th>Name</th><th>Actions</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <div id="status"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

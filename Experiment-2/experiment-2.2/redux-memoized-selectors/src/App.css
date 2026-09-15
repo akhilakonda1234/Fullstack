@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  background: #eef2f7;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 600px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+
+h1 {
+  text-align: center;
+  color: #1976d2;
+}
+
+h2 {
+  color: #444;
+}
+
+.add-post {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+}
+
+button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-post button {
+  background: green;
+  color: white;
+}
+
+.toggle {
+  background: blue;
+  color: white;
+  margin-left: 10px;
+}
+
+.delete {
+  background: red;
+  color: white;
+  margin-left: 5px;
+}
+
+li {
+  margin: 10px 0;
+}

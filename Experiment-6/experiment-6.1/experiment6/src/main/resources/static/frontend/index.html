@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Experiment 6.1 - User Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>PAGINATION</h1>
+        <p>Sorting REST API</p>
+    </div>
+
+    <!-- Add User -->
+
+    <div class="card">
+
+        <h2>Add User</h2>
+
+        <form id="userForm">
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="uid">
+                        UID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="uid"
+                        placeholder="Enter UID"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter name"
+                        required>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-add">
+
+                Add User
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Pagination and Sorting -->
+
+    <div class="card">
+
+        <h2>Pagination & Sorting</h2>
+
+        <div class="controls">
+
+            <div class="form-group">
+
+                <label for="pageSize">
+                    Users Per Page
+                </label>
+
+                <select id="pageSize">
+
+                    <option value="3">
+                        3
+                    </option>
+
+                    <option value="5" selected>
+                        5
+                    </option>
+
+                    <option value="10">
+                        10
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="sortField">
+                    Sort By
+                </label>
+
+                <select id="sortField">
+
+                    <option value="uid">
+                        UID
+                    </option>
+
+                    <option value="name">
+                        Name
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="sortDirection">
+                    Order
+                </label>
+
+                <select id="sortDirection">
+
+                    <option value="asc">
+                        Ascending
+                    </option>
+
+                    <option value="desc">
+                        Descending
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <button
+            class="btn btn-apply"
+            onclick="loadUsers(0)">
+
+            Apply
+
+        </button>
+
+    </div>
+
+
+    <!-- Users -->
+
+    <div class="card">
+
+        <div class="table-top">
+
+            <div>
+
+                <h2>Users</h2>
+
+                <p id="totalInfo">
+                    Total Users: 0
+                </p>
+
+            </div>
+
+            <button
+                class="btn btn-refresh"
+                onclick="loadUsers(currentPage)">
+
+                Refresh
+
+            </button>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                <tr>
+                    <th>UID</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+
+                </thead>
+
+                <tbody id="userTableBody">
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Pagination -->
+
+        <div class="pagination">
+
+            <button
+                id="previousButton"
+                class="btn btn-page"
+                onclick="previousPage()">
+
+                ← Previous
+
+            </button>
+
+            <span id="pageInfo">
+                Page 1
+            </span>
+
+            <button
+                id="nextButton"
+                class="btn btn-page"
+                onclick="nextPage()">
+
+                Next →
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
