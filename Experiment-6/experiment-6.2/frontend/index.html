@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caching & Query Optimization</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 30px; background: #f7f7f7; }
+.box { background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+input, button { padding: 9px; margin: 5px; }
+table { border-collapse: collapse; width: 100%; background: white; }
+th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+th { background: #eee; }
+#status { margin: 15px 0; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Caching & Query Optimization</h1>
+
+<div class="box">
+<h2>Add User</h2>
+<form id="userForm">
+<input id="uid" placeholder="UID" required>
+<input id="name" placeholder="Name" required>
+<input id="city" placeholder="City">
+<input id="country" placeholder="Country">
+<button type="submit">Add User</button>
+</form>
+</div>
+
+<div class="box">
+<h2>Query Operations</h2>
+<button onclick="loadUsers('/normal')">Normal Query</button>
+<button onclick="loadUsers('/optimized')">Optimized Query</button>
+<button onclick="loadUsers('/cached')">Cached Query</button>
+<button onclick="loadUsers('/native')">Native Query</button>
+<button onclick="loadUsers('/sort/id')">Sort by ID</button>
+<button onclick="loadUsers('/sort/name')">Sort by Name</button>
+</div>
+
+<div class="box">
+<div id="status">Select an operation.</div>
+<table>
+<thead>
+<tr><th>ID</th><th>UID</th><th>Name</th><th>City</th><th>Country</th></tr>
+</thead>
+<tbody id="userTable"></tbody>
+</table>
+</div>
+
+<script>
+const API_URL = "http://localhost:8080/api/users";
+
+async function loadUsers(endpoint) {
+    const status = document.getElementById("status");
+    try {
+        status.textContent = "Loading...";
+        const response = await fetch(API_URL + endpoint);
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        const data = await response.json();
+        displayUsers(data);
+        status.textContent = endpoint.substring(1).toUpperCase() +
+            " query completed. Records: " + data.length;
+    } catch (error) {
+        console.error(error);
+        status.textContent = "Unable to connect to backend.";
+    }
+}
+
+function displayUsers(users) {
+    const table = document.getElementById("userTable");
+    table.innerHTML = "";
+
+    users.forEach(user => {
+        const city = user.city ?? user.address?.city ?? "";
+        const country = user.country ?? user.address?.country ?? "";
+
+        table.innerHTML += `
+        <tr>
+            <td>${user.id ?? ""}</td>
+            <td>${user.uid ?? ""}</td>
+            <td>${user.name ?? ""}</td>
+            <td>${city}</td>
+            <td>${country}</td>
+        </tr>`;
+    });
+}
+
+document.getElementById("userForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const user = {
+        uid: document.getElementById("uid").value,
+        name: document.getElementById("name").value,
+        city: document.getElementById("city").value,
+        country: document.getElementById("country").value
+    };
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(user)
+        });
+
+        if (!response.ok) throw new Error("Could not add user");
+
+        event.target.reset();
+        status.textContent = "User added successfully.";
+        loadUsers("/optimized");
+    } catch (error) {
+        console.error(error);
+        status.textContent = "Unable to add user.";
+    }
+});
+</script>
+</body>
+</html>
